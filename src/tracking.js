@@ -398,6 +398,11 @@ Video.prototype = {
         instance.linkAttr('width', instance.canvas, true);
     },
 
+    /**
+    * Callback in the case you need to draw on Video Canvas
+    */
+    drawOnVideo: null,
+
     createVideo_: function() {
         var instance = this,
             autoplay = instance.get('autoplay'),
@@ -502,6 +507,8 @@ Video.prototype = {
         if (domElement.readyState === domElement.HAVE_ENOUGH_DATA) {
             instance.canvas.context.drawImage(
                 instance.domElement, 0, 0, width, height);
+            if(instance.drawOnVideo!=null)
+                instance.drawOnVideo();
         }
 
         return instance;
